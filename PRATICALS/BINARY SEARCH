@@ -1,0 +1,67 @@
+Program Code
+
+#include<stdio.h>
+
+int main() {
+    int a[15], i, j, t, key, l, h, m, c = 0, f = 0;
+
+    printf("enter numbers:");
+    for (i = 0; i < 15; i++)
+        scanf("%d", &a[i]);
+
+    for (i = 0; i < 14; i++) {
+        for (j = 0; j < 14 - i; j++) {
+            if (a[j] > a[j + 1]) {
+                t = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = t;
+            }
+        }
+    }
+
+    printf("sorted: ");
+    for (i = 0; i < 15; i++)
+        printf("%d ", a[i]);
+
+    printf("\nenter target: ");
+    scanf("%d", &key);
+
+    l = 0; 
+    h = 14;
+
+    while (l <= h) {
+        m = (l + h) / 2;
+        c++;
+        printf("\nlow=%d high=%d mid=%d value=%d", l, h, m, a[m]);
+
+        if (a[m] == key) {
+            f = 1;
+            break;
+        } else if (key > a[m]) {
+            l = m + 1;
+        } else {
+            h = m - 1;
+        }
+    }
+
+    if (f)
+        printf("\nfound at %d (1-based:%d)\ncomparisons: %d\narray remains sorted: yes", m, m + 1, c);
+    else
+        printf("\nnot found\ncomparisons: %d\narray remains sorted: yes", c);
+
+    return 0;
+}
+Input
+50 30 10 90 40 70 20 80 60 5 45 35 25 55 15
+45
+
+Output
+enter numbers:sorted: 5 10 15 20 25 30 35 40 45 50 55 60 70 80 90 
+enter target: 
+low=0 high=14 mid=7 value=40
+low=8 high=14 mid=11 value=60
+low=8 high=10 mid=9 value=50
+low=8 high=8 mid=8 value=45
+found at 8 (1-based:9)
+comparisons: 4
+array remains sorted: yes
