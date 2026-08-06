@@ -1,0 +1,52 @@
+Code
+
+#include <stdio.h>
+
+int main() {
+    int N;
+    printf("Enter number of terms (1-50): ");
+    if (scanf("%d", &N) != 1 || N < 1 || N > 50) {
+        printf("Invalid input! Please enter terms between 1 and 50.\n");
+        return 0;
+    }
+
+    long long fib[50];
+    long long a = 0, b = 1;
+    long long sum = 0;
+    long long largest = 0;
+
+    for (int i = 0; i < N; i++) {
+        long long next;
+        if (i == 0) {
+            next = 0;
+        } else if (i == 1) {
+            next = 1;
+        } else {
+            next = a + b;
+            a = b;
+            b = next;
+        }
+        fib[i] = next;
+        sum += fib[i];
+        if (i == 0 || fib[i] > largest) largest = fib[i];
+    }
+
+    printf("Fibonacci Series: ");
+    for (int i = 0; i < N; i++) {
+        printf("%lld", fib[i]);
+        if (i < N - 1) printf(" ");
+    }
+    printf("\n");
+    printf("Sum of series: %lld\n", sum);
+    printf("Largest term: %lld\n", largest);
+
+    return 0;
+}
+Input
+10
+
+Output
+
+Enter number of terms (1-50): Fibonacci Series: 0 1 1 2 3 5 8 13 21 34
+Sum of series: 88
+Largest term: 34
