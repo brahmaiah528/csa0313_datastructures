@@ -1,0 +1,41 @@
+Program Code
+
+#include<stdio.h>
+#include<time.h>
+
+int main (){
+    int a[10], i, key, pos = 0;
+    clock_t s, e;
+
+    for(i = 0; i < 10; i++)
+        scanf("%d", &a[i]);
+
+    printf("array elements:\n");
+    for(i = 0; i < 10; i++)
+        printf("%d ", a[i]);
+
+    scanf("%d", &key);
+
+    s = clock();
+    for(i = 0; i < 10; i++)
+        if(a[i] == key){ pos = i + 1; break; }
+    e = clock();
+
+    if(pos)
+        printf("found at:%d \n", pos);
+    else
+        printf("not found:\n");
+
+    printf("comparision=%d\n", pos ? pos : 10);
+    printf("time=%.1d second(s)\n", s - e);
+
+}
+Input
+15 14 12 11 0 4 8 9 6 85
+4
+
+Output
+array elements:
+15 14 12 11 0 4 8 9 6 85 found at:6 
+comparision=6
+time=0 second(s)
