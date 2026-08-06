@@ -1,0 +1,102 @@
+CODE:
+#include<stdio.h>
+#define n 10
+
+void printarray(int a[]){
+    printf("[");
+    for(int i=0;i<n;i++){
+        printf("%d",a[i]);
+        if(i!=n-1) printf(" ");
+    }
+    printf("]\n");
+}
+
+void reverse(int a[],int start, int end){
+    while(start<end){
+        int temp = a[start];
+        a[start]=a[end];
+        a[end]= temp;
+        start++;
+        end--;
+    }
+}
+
+int sum(int a[]){
+    int s = 0;
+    for(int i=0;i<n;i++)
+        s += a[i];
+    return s;
+}
+
+int main(){
+    int a[n], original[n], k, i;
+    char ch, again;
+
+    do {
+        printf("enter the numbers:");
+        for(i=0; i<n; i++){
+            scanf("%d", &a[i]);
+            original[i] = a[i];
+        }
+
+        printf("rotate left (or) right: ");
+        scanf(" %c", &ch);
+
+        printf("position: ");
+        scanf("%d", &k);
+
+        printf("original: ");
+        printarray(a);
+
+        if(ch == 'l' || ch == 'L'){
+            reverse(a, 0, k-1);
+            printf("step1: ");
+            printarray(a);
+
+            reverse(a, k, n-1);
+            printf("step2: ");
+            printarray(a);
+
+            reverse(a, 0, n-1);
+            printf("step3: ");
+            printarray(a);
+        } else if(ch == 'r' || ch == 'R'){
+            reverse(a, 0, n-1);
+            printf("step1: ");
+            printarray(a);
+
+            reverse(a, 0, k-1);
+            printf("step2: ");
+            printarray(a);
+
+            reverse(a, k, n-1);
+            printf("step3: ");
+            printarray(a);
+        }
+
+        printf("sum of differences:%d\n", sum(a) - sum(original));
+
+        printf("do another rotation? (y/n):");
+        scanf(" %c", &again);
+
+    } while(again == 'y' || again == 'Y');
+
+    return 0;
+}
+
+INPUT:
+
+1 2 3 4 5 6 7 8 9 10
+l
+2
+n
+
+OUTPUT:
+
+enter the numbers:rotate left (or) right: position: original: [1 2 3 4 5 6 7 8 9 10]
+step1: [2 1 3 4 5 6 7 8 9 10]
+step2: [2 1 10 9 8 7 6 5 4 3]
+step3: [3 4 5 6 7 8 9 10 1 2]
+sum of differences:0
+do another rotation? (y/n):
+
