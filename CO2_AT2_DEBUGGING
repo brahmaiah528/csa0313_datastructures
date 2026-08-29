@@ -1,0 +1,235 @@
+Q1. Find the bugs, include the missing lines in the following snippet. 
+Code 
+#include <stdio.h> int linearSearch(int arr[], int n, int key) { 
+    for (int i = 0; i < n; i++) {         if (arr[i] == key) {             return i; 
+        } 
+    } 
+    return -1; 
+} 
+int main() { 
+    int n, key;      if (scanf("%d", &n) != 1) return 0;         int arr[n];     for (int i = 0; i < n; i++) {         scanf("%d", &arr[i]); 
+    }     
+    scanf("%d", &key);        int result = linearSearch(arr, n, key);        if (result != -1) {         printf("%d\n", result);     } else {         printf("-1\n"); 
+    }    
+    return 0; 
+} 
+Input 
+5 
+10 20 30 40 50 
+30 
+Output 
+2 
+Q2. Buggy Code in an array 
+Code 
+#include <stdio.h> 
+ 
+int main() { 
+    int arr[5];     for (int i = 0; i < 5; i++) {         scanf("%d", &arr[i]); 
+    } 
+for (int i = 0; i < 5; i++) { 
+        printf("%d ", arr[i]); 
+    } 
+    return 0; 
+} 
+Input 
+10 20 30 40 50 
+Output 
+10 20 30 40 50  
+Q3. Identify an errors in the following snippet 
+Code 
+#include <stdio.h> int binarySearch(int arr[], int n, int key) {     int low = 0, high = n - 1;     while(low <= high) {         int mid = (low + high) / 2;         if(arr[mid] == key) return mid;         else if(arr[mid] < key) low = mid + 1;         else high = mid - 1; 
+    } 
+    return -1; 
+} 
+int main() {     int n, key;     if (scanf("%d", &n) != 1) return 0;         int arr[n];     for (int i = 0; i < n; i++) {         scanf("%d", &arr[i]); 
+    }     
+    scanf("%d", &key);         int result = binarySearch(arr, n, key); printf("%d\n", result);     
+    return 0; 
+} 
+Input 
+5 
+10 20 30 40 50 
+30 
+Output 
+2 
+Q4. Buggy Code in Stack Push Operation 
+Code 
+#include <stdio.h> 
+#define MAX 5 
+ 
+int stack[MAX]; int top = -1; void push(int data) 
+{ 
+    if (top == MAX - 1) 
+    { 
+        printf("Stack Overflow\n"); 
+    }     else 
+    { 
+        stack[++top] = data; 
+    } 
+} 
+int main() 
+{     int n, value;     printf("Enter number of elements: "); scanf("%d", &n); 
+    for(int i = 0; i < n; i++) 
+    { 
+        printf("Enter value: ");         scanf("%d", &value);         push(value); 
+    } 
+    printf("Top element = %d\n", stack[top]);     return 0; 
+} 
+Input 
+10 20 30 
+Output 
+Enter number of elements: Enter value: Enter value: Enter value: Enter value: Enter value: Enter value: Stack Overflow 
+Enter value: Stack Overflow 
+Enter value: Stack Overflow 
+Enter value: Stack Overflow 
+Enter value: Stack Overflow 
+Top element = 30 
+Q5. Buggy Code in Stack POP Operation 
+Code 
+#include <stdio.h> 
+#define MAX 5 
+ 
+int stack[MAX]; 
+int top = -1; void push(int data) {     if (top < MAX - 1) {         stack[++top] = data; 
+    } 
+} 
+int pop() {     if (top == -1) {         return -1; 
+    } 
+    return stack[top--]; 
+} 
+int main() {     int n, val;     if (scanf("%d", &n) != 1) return 0; 
+    for (int i = 0; i < n; i++) {         scanf("%d", &val);         push(val); 
+    } 
+    printf("%d\n", pop());     return 0; 
+} 
+Input 
+3 
+10 20 30 
+Output 
+30 
+Q6. Buggy Code in underflow operation 
+Code 
+#include <stdio.h> 
+#define MAX 5 
+ 
+int stack[MAX]; int top = -1; void push(int data) {     if (top < MAX - 1) {         stack[++top] = data;     } 
+} 
+int pop() {     if (top == -1) {         printf("Underflow\n");         return -1; 
+    } 
+    return stack[top--]; 
+} 
+int main() {     int n, val;     if (scanf("%d", &n) != 1) return 0;     for (int i = 0; i < n; i++) {         scanf("%d", &val);         push(val); 
+    } 
+    printf("%d\n", pop());     return 0; 
+} 
+Input 
+3 
+10 20 30 
+Output 
+30 
+Q7. Find the issue in the following code snippet. 
+Code 
+#include <stdio.h> #define MAX 5 int queue[MAX]; 
+int front = 0, rear = 0; 
+void enqueue(int x) 
+{ 
+    if (rear == MAX) 
+    { 
+        printf("Queue Overflow\n"); 
+        return; 
+    } 
+    queue[rear++] = x; 
+} 
+void display() 
+{     int i;     if (front == rear) 
+    { 
+        printf("Queue is Empty\n"); 
+        return; 
+    } 
+    printf("Queue elements: ");     for (i = front; i < rear; i++) 
+    { 
+        printf("%d ", queue[i]); 
+    } 
+    printf("\n"); 
+} 
+int main() 
+{     int n, x, i; 
+    printf("Enter number of elements: ");     scanf("%d", &n);     for (i = 0; i < n; i++) 
+    { 
+        printf("Enter value: "); 
+        scanf("%d", &x);         enqueue(x); 
+    } 
+    display();     return 0; 
+} 
+Input 
+3 
+12 45 66 
+Output 
+Enter number of elements: Enter value: Enter value: Enter value: Queue elements: 12 45 66  
+Q8. Buggy code in node creation 
+Code 
+#include <stdio.h> 
+#include <stdlib.h> 
+ 
+struct Node { 
+    int data;     struct Node *next; 
+}; 
+ 
+int main() {     struct Node *newNode = (struct Node *)malloc(sizeof(struct Node)); 
+ 
+    newNode->data = 10;     newNode->next = NULL; 
+ 
+    printf("%d", newNode->data); 
+ 
+free(newNode); 
+    return 0; 
+} 
+Output 
+10 
+Q9. Include missing statements and display the list of elements in linkedlist 
+Code 
+#include <stdio.h> 
+#include <stdlib.h> 
+ 
+struct Node { 
+    int data;     struct Node *next; 
+}; 
+ 
+void display(struct Node *head) {     while (head != NULL) {         printf("%d ", head->data);         head = head->next; 
+    } 
+} 
+ 
+int main() {     struct Node *head = (struct Node *)malloc(sizeof(struct Node));     struct Node *second = (struct Node *)malloc(sizeof(struct Node)); 
+ 
+    head->data = 10;     head->next = second; 
+ 
+    second->data = 20; second->next = NULL;     display(head); 
+ 
+    free(head);     free(second); 
+ 
+    return 0; 
+} 
+Output 
+10 20  
+Q10. 0Buggy code in node creation 
+Code 
+#include <stdio.h> 
+#include <stdlib.h> 
+ 
+struct Node { 
+    int data; 
+    struct Node *next; 
+}; 
+ 
+int main() {     struct Node *temp = (struct Node *)malloc(sizeof(struct Node)); 
+ 
+    temp->data = 25;     temp->next = NULL; 
+ 
+    printf("%d", temp->data); 
+ 
+    free(temp); 
+ 
+return 0; 
+}
+Output 
+25 
