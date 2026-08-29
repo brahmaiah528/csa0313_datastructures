@@ -1,0 +1,70 @@
+#include <stdio.h>
+
+int main() 
+{
+    int a[50], n, i, j, t, l, h, m, f = -1, s = -1;
+
+    scanf("%d", &n);
+    for (i = 0; i < n; i++) 
+        scanf("%d", &a[i]);
+
+    // Bubble Sort (Ascending)
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - 1 - i; j++) {
+            if (a[j] > a[j + 1]) {
+                t = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = t;
+            }
+        }
+    }
+
+    // Binary Search: First temperature >= 30
+    l = 0; h = n - 1;
+    while (l <= h) {
+        m = (l + h) / 2;
+        if (a[m] >= 30) {
+            f = m;
+            h = m - 1;
+        } else {
+            l = m + 1;
+        }
+    }IN
+
+    // Binary Search: Last temperature <= 25
+    l = 0; h = n - 1;
+    while (l <= h) {
+        m = (l + h) / 2;
+        if (a[m] <= 25) {
+            s = m;
+            l = m + 1;
+        } else {
+            h = m - 1;
+        }
+    }
+
+    // Display Sorted Array
+    for (i = 0; i < n; i++) 
+        printf("%d ", a[i]);
+
+    // Output Results
+    if (f == -1) 
+        printf("\nFirst >=30: Not found");
+    else 
+        printf("\nFirst >=30: index %d (%d)", f, a[f]);
+
+    if (s == -1) 
+        printf("\nLast <=25: Not found");
+    else 
+        printf("\nLast <=25: index %d (%d)", s, a[s]);
+
+    return 0;
+}
+
+INPUT
+6
+22 28 31 24 29 32
+ OUTPUT:
+22 24 28 29 31 32 
+First >=30: index 4 (31)
+Last <=25: index 1 (24)
